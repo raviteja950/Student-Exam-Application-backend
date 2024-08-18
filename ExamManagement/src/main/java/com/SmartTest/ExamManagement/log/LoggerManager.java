@@ -1,4 +1,4 @@
-package com.SmartTest.ExamManagement.util;
+package com.SmartTest.ExamManagement.log;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
