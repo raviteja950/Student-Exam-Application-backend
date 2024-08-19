@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.SmartTest.ExamManagement.bean.CourseRequestBean;
+import com.SmartTest.ExamManagement.bean.LecturerRequestBean;
 import com.SmartTest.ExamManagement.log.LoggerManager;
 
 @Component
@@ -25,5 +26,24 @@ public class checkManadaortyFiledForCourse {
 		}
 		return result;
 
+	}
+	
+	public boolean checkMandatoryForLecturers(LecturerRequestBean bean) {
+		
+		LoggerManager.infoSimple(LOGGER, "inside chcekMandatory Method");
+		boolean result = true;
+		
+		if(	bean.getLecturerName().isEmpty() || bean.getLecturerName() == null ||
+			bean.getLecturerAge() == 0 || bean.getLecturerEmail() == null ||
+			bean.getLecturerEmail().isEmpty() || bean.getLecturerPhone() == 0 ||
+			bean.getLecturerAddBy().isEmpty() || bean.getLecturerAddBy() == null ||
+			bean.getCourseName().isEmpty() || bean.getCourseName() == null ||
+			bean.getCourseDetails().isEmpty() || bean.getCourseDetails() == null
+		   ) {
+			result = false;
+		}
+		
+		return result;
+		
 	}
 }

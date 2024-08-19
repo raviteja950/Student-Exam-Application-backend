@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SmartTest.ExamManagement.bean.CourseRequestBean;
+import com.SmartTest.ExamManagement.bean.LecturerRequestBean;
 import com.SmartTest.ExamManagement.bean.ResponceBean;
 import com.SmartTest.ExamManagement.log.LoggerManager;
 import com.SmartTest.ExamManagement.service.AdminService;
@@ -55,6 +56,34 @@ public class AdminController {
 			responce.setMessage("System error occured! contact admin team asap!..");
 		}
 		return responce;
+	}
+
+	@PostMapping("/AddLecturer")
+	public ResponceBean AddLecturer(@RequestBody LecturerRequestBean bean) {
+
+		LoggerManager.infoSimple(LOGGER, "Inside Lecturer API");
+		ResponceBean responce = new ResponceBean();
+
+		try {
+
+			boolean res = fieldValidator.checkMandatoryForLecturers(bean);
+
+			if (res) {
+				responce = service.AddLecturer(bean);
+			} else {
+				LoggerManager.infoError(LOGGER, "Enter All Mandatory Feilds");
+				responce.setCode(500);
+				responce.setMessage("Enter All Mandatory Feilds");
+			}
+
+		} catch (Exception e) {
+			LoggerManager.infoSimple(LOGGER, e.toString());
+			responce.setCode(500);
+			responce.setMessage("System error occured! contact admin team asap!..");
+		}
+
+		return responce;
+
 	}
 
 }
